@@ -28,10 +28,18 @@ The format_for method takes multiple options. For example:
     define_easy_dates do
       format_for :updated_at, :signup_date, :test_date                      # Array
       format_for :created_at, :format => "%H:%M"                            # Uses strftime settings, :format can be used on arrays too
+      format_for :start_date, :format => "%m/%d/%Y", :type => :date         # Uses type to properly set start_date as a Ruby Date object
       format_for :updated_at, :format => "%H:%M%P", :as => "updated_time"   # :as will allow you to set your own name for your required format (:as does not work on an array of time columns like in the first example)
     end
   end
-  
+
+Valid Types are:
+  :date
+  :datetime
+  :time
+
+If a :type is not provided, the default Ruby object used is DateTime.
+
 Once your dates have been defined you can access the new formatted date as follows:
 
   @user = User.first
