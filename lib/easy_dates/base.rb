@@ -40,19 +40,19 @@ module EasyDates
           when :datetime then
             class_eval <<-EOL
               def #{chosen_name}=(new_val)
-                self.#{name} = (DateTime.parse(new_val) rescue nil)
+                self.#{name} = (DateTime.strptime(new_val, "#{format}") rescue nil)
               end
             EOL
           when :date then
             class_eval <<-EOL
               def #{chosen_name}=(new_val)
-                self.#{name} = (Date.parse(new_val) rescue nil)
+                self.#{name} = (Date.strptime(new_val, "#{format}") rescue nil)
               end
             EOL
           when :time then
             class_eval <<-EOL
               def #{chosen_name}=(new_val)
-                self.#{name} = (DateTime.parse(new_val).to_time rescue nil)
+                self.#{name} = (DateTime.strptime(new_val, "#{format}").to_time rescue nil)
               end
             EOL
         end
